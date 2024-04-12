@@ -2,12 +2,16 @@ package com.example.specialassignment_3
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.example.specialassignment_3.databinding.FragmentDashBoardBinding
+import kotlinx.coroutines.flow.flow
+import java.util.concurrent.Flow
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
@@ -17,25 +21,16 @@ private const val ARG_PARAM1 = "param1"
  * Use the [DashBoardFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@Suppress("DEPRECATION")
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 class DashBoardFragment : Fragment() {
-    private var param1: Flower? = null
     private val binding by lazy { FragmentDashBoardBinding.inflate(layoutInflater) }
-
+    private var flower: Flower? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                param1 = it.getParcelable(ARG_PARAM1, Flower::class.java)
-                /*
-                에뮬레이터 버전이 티라미수 버전이 아니다
-                버전에 따라 데이터 받아오는 방식이 다르다
-                버전 분기를 해줘야한다. → 매번 분기하기는 힘드니 내 애뮬레이터 버전을 티라미수로 바꿔보자!
-                 */
-            } else {
-                param1 = it.getParcelable(ARG_PARAM1)
-            }
-        }
+        flower = arguments?.getParcelable<Parcelable>(ARG_PARAM1) as Flower? // 제일 중요한 코드 !!
+        Log.d("debug3434", flower.toString())
     }
 
     override fun onCreateView(
@@ -47,15 +42,15 @@ class DashBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.transmittedTv.text = "꽃 이름: ${param1?.name ?:"-1"} \n설명: ${param1?.description ?:"-1"}"
+         binding.transmittedTv.text = "꽃 이름: ${flower?.name ?:"-1"} \n설명: ${flower?.description ?:"-1"}"
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: Flower) =
+        fun newInstance(data: Flower) =
             DashBoardFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable(ARG_PARAM1, param1)
+                    putParcelable(ARG_PARAM1, data)
                 }
             }
     }
