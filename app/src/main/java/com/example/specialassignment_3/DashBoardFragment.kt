@@ -21,11 +21,20 @@ class DashBoardFragment : Fragment() {
     private var param1: Flower? = null
     private val binding by lazy { FragmentDashBoardBinding.inflate(layoutInflater) }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getParcelable(ARG_PARAM1, Flower::class.java) // 튜터님 해당 코드 피드백 부탁드려요
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                param1 = it.getParcelable(ARG_PARAM1, Flower::class.java)
+                /*
+                에뮬레이터 버전이 티라미수 버전이 아니다
+                버전에 따라 데이터 받아오는 방식이 다르다
+                버전 분기를 해줘야한다. → 매번 분기하기는 힘드니 내 애뮬레이터 버전을 티라미수로 바꿔보자!
+                 */
+            } else {
+                param1 = it.getParcelable(ARG_PARAM1)
+            }
         }
     }
 

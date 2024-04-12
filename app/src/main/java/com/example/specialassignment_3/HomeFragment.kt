@@ -1,10 +1,12 @@
 package com.example.specialassignment_3
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import com.example.specialassignment_3.databinding.FragmentHomeBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,11 +36,14 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnHome.setOnClickListener {
             val data = Flower("1","장미","This is rose")
             val dashBoardFragment = DashBoardFragment.newInstance(data)
+//            dashBoardFragment.arguments(Bundle().putString(ARG_PARAM1,data))
+
 
             // fragment → fragment 데이터 전달
             requireActivity().supportFragmentManager.beginTransaction()
