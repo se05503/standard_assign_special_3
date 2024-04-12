@@ -8,6 +8,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.specialassignment_3.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabItem
+import com.google.android.material.tabs.TabLayout
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,17 +17,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.apply {
-            tabHome.setOnClickListener{
-                setFragment(HomeFragment())
+
+        val tableLayout = binding.tableLayout
+        val homeTab = tableLayout.getTabAt(0)
+        val dashboardTab = tableLayout.getTabAt(1)
+        val notificationTab = tableLayout.getTabAt(2)
+
+        tableLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab) {
+                    homeTab -> {
+                        setFragment(HomeFragment())
+                    }
+                    dashboardTab -> {
+                        setFragment(DashBoardFragment())
+                    }
+                    notificationTab -> {
+                        setFragment(NotificationFragment())
+                    }
+                }
             }
-            tabDashboard.setOnClickListener {
-                setFragment(DashBoardFragment())
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
-            tabNotification.setOnClickListener {
-                setFragment(NotificationFragment())
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
             }
-        }
+        })
     }
 
     private fun setFragment(fragment: Fragment) {
