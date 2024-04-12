@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.apply {
-            tabHome.setOnClickListener {
+            tabHome.setOnClickListener{
                 setFragment(HomeFragment())
             }
             tabDashboard.setOnClickListener {
