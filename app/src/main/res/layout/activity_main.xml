@@ -13,6 +13,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/table_layout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,6 +21,7 @@
         android:id="@+id/table_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="#E6E6E6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,19 +31,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tab_home"
-            android:icon="@drawable/img_lv1"
+            android:icon="@drawable/ic_home"
             android:text="Home"/>
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tab_dashboard"
-            android:icon="@drawable/img_lv2"
+            android:icon="@drawable/ic_dashboard"
             android:text="Dashboard"/>
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tab_notification"
-            android:icon="@drawable/img_lv3"
+            android:icon="@drawable/ic_notification"
             android:text="Notifications"/>
     </com.google.android.material.tabs.TabLayout>
 
